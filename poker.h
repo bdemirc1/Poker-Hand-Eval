@@ -2,14 +2,14 @@
 #define _POKER_H
 
 /* Reference functions */
-void ref_count_cards(struct hand *h);
+/* void ref_count_cards(struct hand *h);
 int ref_is_flush(struct hand *h);
 int ref_is_straight(struct hand *h);
 void ref_eval_strength(struct hand *h);
 void ref_eval_players_best_hand(struct player *p);
 void ref_copy_card(struct card *dst, struct card *src);
 void ref_initialize_player(struct player *p, struct card *player_cards, struct card *community_cards);
-
+ */
 /* Maximum possible combinations of 5 cards from 2 player cards and 5 community cards is 7C5 == 21 */
 #define MAX_COMBINATIONS 21
 
@@ -34,12 +34,18 @@ struct hand {
 };
 
 struct player {
-	/* TASK 2: Implement the player structure that contains: 
-	 *	(1) an array 'hands' of MAX_COMBINATION number of hands, and 
-	 *  (2) a pointer 'best_hand' that points to the strongest hand in the hands array.
-	 */
+
+	struct hand hands[MAX_COMBINATIONS];
+	struct hand* best_hand;
 };
 
-/* TASK 1: Provide a prototype for all the functions used in poker.c */
+
+void count_cards(struct hand *h);
+int is_flush(struct hand *h);
+int is_straight(struct hand *h);
+void eval_strength(struct hand *h);
+void eval_players_best_hand(struct player *p);
+void copy_card(struct card *dst, struct card *src);
+void initialize_player(struct player *p, struct card *player_cards, struct card *community_cards);
 
 #endif
